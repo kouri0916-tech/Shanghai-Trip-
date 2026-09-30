@@ -723,10 +723,108 @@
         }
 
         @media (max-width: 600px) {
-            #app-toolbar { height: auto; padding: 6px 8px; gap: 5px; }
-            #app-toolbar .tb-btn { font-size: 13px; padding: 6px 10px; }
-            body.has-toolbar { padding-top: 90px; }
-            #checkin-panel { width: 160px; }
+            /* 防止横向滚动导致页面错乱 */
+            html, body { overflow-x: hidden; width: 100%; }
+
+            /* 顶部工具栏：可横向滑动，不换行挤压 */
+            #app-toolbar {
+                height: auto;
+                padding: 6px 8px;
+                gap: 5px;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+            #app-toolbar .tb-btn { font-size: 13px; padding: 6px 10px; flex-shrink: 0; }
+            #app-toolbar .tb-sep { flex-shrink: 0; }
+            body.has-toolbar { padding-top: 96px; }
+            #checkin-panel { width: 160px; right: 10px; bottom: 10px; }
+
+            /* 容器与封面 */
+            .container { width: 100%; }
+            body { padding: 12px; padding-top: 96px; }
+            .cover { padding: 36px 18px; margin-bottom: 18px; border-radius: 12px; }
+            .cover::before { font-size: 90px; top: -10px; right: -10px; }
+            .cover h1 { font-size: 28px; margin-bottom: 10px; }
+            .cover-subtitle { font-size: 15px; margin-bottom: 18px; line-height: 1.5; }
+            .cover-badge { font-size: 13px; padding: 8px 16px; }
+
+            /* 概览卡片：两列，缩小内边距 */
+            .overview { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+            .overview-card { padding: 14px 8px; }
+            .overview-icon { font-size: 28px; margin-bottom: 6px; }
+            .overview-value { font-size: 19px; }
+            .overview-label { font-size: 12px; }
+
+            /* 日期标签：可横向滑动，不挤压 */
+            .day-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+                gap: 8px;
+                padding-bottom: 4px;
+            }
+            .day-tab { padding: 9px 16px; font-size: 14px; flex-shrink: 0; }
+
+            /* 日程卡片：缩小内边距 */
+            .day-card { padding: 18px 14px; margin-bottom: 16px; border-radius: 12px; }
+
+            /* 卡片头部：改为纵向堆叠，避免三列挤压 */
+            .day-header {
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-bottom: 18px;
+                padding-bottom: 15px;
+            }
+            .day-number { width: 52px; height: 52px; font-size: 22px; margin-right: 0; }
+            .day-title { flex: 1 1 auto; min-width: 0; }
+            .day-title h2 { font-size: 19px; line-height: 1.4; }
+            .day-theme { font-size: 13px; }
+            .day-weather {
+                flex-basis: 100%;
+                width: 100%;
+                text-align: center;
+                font-size: 13px;
+                padding: 8px 14px;
+                order: 3;
+            }
+
+            /* 时间线 */
+            .timeline { padding-left: 32px; }
+            .timeline::before { left: 11px; }
+            .timeline-dot { left: -27px; width: 20px; height: 20px; border-width: 2px; }
+            .timeline-time { font-size: 12px; }
+            .timeline-title { font-size: 16px; }
+            .timeline-content { padding: 14px; }
+
+            /* 打卡按钮：缩小并贴合 */
+            .check-btn { margin-top: -30px; font-size: 12px; padding: 3px 10px; }
+
+            /* 交通/景点卡片 */
+            .transport-card { padding: 12px 14px; }
+            .transport-route { font-size: 13px; line-height: 1.6; }
+            .transport-meta { flex-wrap: wrap; gap: 8px; font-size: 12px; }
+            .attraction-desc { font-size: 13px; }
+            .tag-group .tag { font-size: 12px; padding: 4px 10px; }
+
+            /* 美食网格：单列 */
+            .food-grid { grid-template-columns: 1fr; gap: 10px; }
+            .food-card { padding: 14px; }
+            .food-card-header { flex-wrap: wrap; gap: 6px; }
+            .food-name { font-size: 15px; }
+            .food-price { font-size: 13px; }
+
+            /* 两列布局 -> 单列 */
+            .two-columns { grid-template-columns: 1fr !important; gap: 12px; }
+
+            /* 提示框 */
+            .tip-box { padding: 14px; }
+            .tip-content { font-size: 13px; }
+
+            /* 预算表格等宽内容：允许横向滚动而非撑破页面 */
+            table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
         }
     </style>
 </head>
